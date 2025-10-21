@@ -9,16 +9,7 @@ export async function middleware(request) {
   const { data: { user }, error } = await supabase.auth.getUser(session);
 
   // Define protected routes
-  const protectedRoutes = ['/dashbord' ]; // Add more routes as needed
-
-  // Check if the requested route is protected
-  if (protectedRoutes.includes(request.nextUrl.pathname)) {
-    // Redirect to login if the user is not authenticated
-    if (!user || error) {
-      return NextResponse.redirect(new URL('/auth', request.url));
-    }
-  }
-
+  
 
   const host = request.headers.get('host') || '';
   const subdomain = host.split('.')[0];
